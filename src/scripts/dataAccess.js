@@ -1,5 +1,7 @@
 const applicationState = {
-    requests: []
+    requests: [],
+    plumbers: [],
+    completions: []
 
 }
 
@@ -17,8 +19,35 @@ export const fetchRequests = () => {
         )
 }
 
+
+export const fetchPlumbers = () => {
+    return fetch(`${API}/plumbers`)
+    .then(response => response.json())
+    .then(
+        (plumber) => {
+            // Store the external state in application state
+            applicationState.plumbers = plumber
+        }
+        )
+    }
+    
+export const fetchCompletions = () => {
+    return fetch(`${API}/completions`)
+    .then(response => response.json())
+    .then(
+        (completion) => {
+            // Store the external state in application state
+            applicationState.completions = completion
+        }
+        )
+    }
+        
+export const getPlumbers = () => {
+return applicationState.plumbers.map(item => ({...item}))
+}
+        
 export const getRequests = () => {
-    return applicationState.requests.map(item => ({...item}))
+return applicationState.requests.sort(item => ({...item}))
 }
 
 //Fetch call for POST
@@ -33,6 +62,24 @@ export const sendRequest = (userServiceRequest) => {
 
 
     return fetch(`${API}/requests`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            document.dispatchEvent(new CustomEvent("stateChanged"))
+
+        })
+}
+
+export const saveCompletion = (completion) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(completion)
+    }
+
+
+    return fetch(`${API}/completions`, fetchOptions)
         .then(response => response.json())
         .then(() => {
             document.dispatchEvent(new CustomEvent("stateChanged"))
