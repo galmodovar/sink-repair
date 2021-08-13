@@ -11,10 +11,16 @@
   ],
   "completions": [
     {
-      "requestId": "2",
-      "plumberId": "1",
-      "dateCreated": 1628866384505,
+      "requestId": 1,
+      "plumberId": 1,
+      "dateCreated": 1628877775503,
       "id": 1
+    },
+    {
+      "requestId": 2,
+      "plumberId": 2,
+      "dateCreated": 1628877790168,
+      "id": 2
     }
   ],
   "requests": [
@@ -31,6 +37,27 @@
       "budget": "400",
       "neededBy": "2021-08-14",
       "id": 2
+    },
+    {
+      "description": "fix shower head",
+      "address": "10000 infinity way",
+      "budget": "300",
+      "neededBy": "2021-08-23",
+      "id": 3
+    },
+    {
+      "description": "fix toilet leak",
+      "address": "1000 infinity way",
+      "budget": "200",
+      "neededBy": "2021-08-24",
+      "id": 4
+    },
+    {
+      "description": "fix faucet leak",
+      "address": "1000 infinity way",
+      "budget": "400",
+      "neededBy": "2021-08-25",
+      "id": 5
     }
   ]
 }

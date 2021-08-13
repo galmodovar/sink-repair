@@ -47,7 +47,17 @@ return applicationState.plumbers.map(item => ({...item}))
 }
         
 export const getRequests = () => {
-return applicationState.requests.sort(item => ({...item}))
+    const completedRequests = applicationState.requests.map(request => {
+        //adds completed property if completion.requestId === request.id returns true
+        request.completed = !!applicationState.completions.find(completion => completion.requestId === request.id)
+        return request
+    })
+
+    completedRequests.sort((a,b) => {
+        //sorts each object in ascending order by .completed (true/false) property
+        return a.completed - b.completed
+    })
+    return completedRequests
 }
 
 //Fetch call for POST

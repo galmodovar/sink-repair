@@ -22,8 +22,8 @@ mainContainer.addEventListener(
                    3. date_created
             */
             const completion = { 
-                requestId: requestId ,
-                plumberId: plumberId ,
+                requestId: parseInt(requestId) ,
+                plumberId: parseInt(plumberId) ,
                 dateCreated: Date.now()            
             }
            
@@ -43,15 +43,17 @@ mainContainer.addEventListener(
 
 
 export const Requests = () => {
-    let items = getRequests()
-    let plumbers = getPlumbers()
+    const items = getRequests()
+    const plumbers = getPlumbers()
    
-    let html = "<ul>"
+    let html = "<table>"
 
     // Use .map() for converting objects to <li> elements
     const listItems = items.map(item => {
-            return `<li>
+            return `<td>
                 ${item.description}
+                ${item.address}
+                ${item.budget}
                 <button class="request__delete"
                 id="request--${item.id}">
                 Delete
@@ -63,8 +65,8 @@ export const Requests = () => {
                                          }
                                     ).join("")
                                   }
-                    </select>
-                 </li>
+                </select>
+                 </td>
                 `
 
         
@@ -72,7 +74,7 @@ export const Requests = () => {
             })
         
         html += listItems.join("")
-        html += "</ul>"
+        html += "</table>"
         
         return html
     }
